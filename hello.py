@@ -1,16 +1,14 @@
 #!/usr/bin/env python
-from flask import Flask,url_for
+from flask import Flask,request
 app = Flask(__name__)
 
 
-@app.route('/user/<username>')
-def show_user_profile(username):
-    return 'User %s' % username
-
-
-@app.route('/')
-def show_url_for():
-    return url_for('show_user_profile', username = mani)
+@app.route('/login' , methods = ['GET'])
+def login():
+    if request.values:
+        return 'username is %s' % request.values['username']
+    else:
+         return '<form method = "get" action="/login"><input type="text"  name ="username"/><p><button type="submit">Submit</button></form>'
 
 
 if __name__ == '__main__':
