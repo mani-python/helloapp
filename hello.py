@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from flask import Flask,request,render_template,url_for,redirect
+from flask import Flask,request,render_template,url_for,redirect,flash
 app = Flask(__name__)
 
 
@@ -11,6 +11,7 @@ def login():
              request.form.get('username'),
              request.form.get('password')
          ):
+            flash ("Successfully logged in")
             return redirect(url_for('welcome', username=request.form.get('username')))
         else:
             error = "Incorrect username or password"
@@ -28,6 +29,7 @@ def passwordcheck(username, password):
     else:
         return False
 if __name__ == '__main__':
+    app.secret_key = 'Supersecret'
     app.debug = True
     app.run()
 
